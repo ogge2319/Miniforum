@@ -10,12 +10,12 @@ export const getPosts = async () => {
 };
 
 //Skapa nytt inlägg
-export const createPost = async () => {
+export const createPost = async (data) => {
     const res = await api.post("/posts", data);
     return res.data;
 };
 
 //Ta bort inlägg
-export const deletePost = async () => {
+export const deletePost = async (id) => {
     await api.delete(`/posts/${id}`);
 }
