@@ -1,1 +1,20 @@
-/*CSS-variabler (färger, spacing, typografi) */ 
+/* === Färgvariabler för ljus & mörk design === */
+:root {
+    --bg: #ffffff;           /* sidbakgrund */
+    --text: #0f1419;         /* standardtext */
+    --text-strong: #15202b;  /* rubrik/fet text */
+    --border: #e6ecf0;       /* kortborder */
+    --accent: #1d9bf0;       /* blå accent */
+    --card-bg: #ffffff;       /* kortbakgrund */
+  }
+  
+  /* Mörkt tema */
+  [data-theme="dark"] {
+    --bg: #0d1117;           /* hela sidans bakgrund */
+    --text: #e7e9ea;         /* standardtext */
+    --text-strong: #ffffff;  
+    --border: #2f3336;
+    --accent: #1d9bf0;
+    --card-bg: #16181c;      /* kortbakgrund */
+  }
+  

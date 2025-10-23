@@ -1,1 +1,233 @@
-/* bas-stilar, layout helpers, utility klasser*/ 
+/* ============================= */
+/* GLOBAL LIGHT/DARK THEME VARIABLES */
+/* ============================= */
+:root {
+    --bg: #ffffff;           /* sidbakgrund */
+    --text: #0f1419;         /* vanlig text */
+    --text-strong: #15202b;  /* rubriker/fet text */
+    --border: #e6ecf0;       /* kortborder */
+    --accent: #1d9bf0;       /* blå accent */
+    --card-bg: #ffffff;       /* kortbakgrund */
+  }
+  
+  body[data-theme="dark"] {
+    --bg: #0d1117;
+    --text: #e7e9ea;
+    --text-strong: #ffffff;
+    --border: #2f3336;
+    --accent: #1d9bf0;
+    --card-bg: #16181c;
+  }
+  
+  /* ============================= */
+  /* GLOBAL BASE STYLES */
+  /* ============================= */
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  #root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+  
+  /* LINKS */
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* ============================= */
+  /* BUTTONS */
+  /* ============================= */
+  button, .btn {
+    border-radius: 9999px;
+    border: none;
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  button:hover, .btn:hover {
+    background-color: #0c7abf;
+  }
+  body[data-theme="dark"] button:hover,
+  body[data-theme="dark"] .btn:hover {
+    background-color: #1a91da;
+  }
+  
+  .btnSecondary {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+  .btnSecondary:hover {
+    background: rgba(29, 155, 240, 0.1);
+  }
+  
+  /* ============================= */
+  /* CARDS / SURFACES */
+  /* ============================= */
+  .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
+  }
+  .card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  
+  /* ============================= */
+  /* HEADERS & TEXT */
+  /* ============================= */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-strong);
+    margin: 0;
+  }
+  p, span, small {
+    color: var(--text);
+  }
+  .date {
+    color: #536471;
+    font-size: 0.85rem;
+  }
+  body[data-theme="dark"] .date {
+    color: #8899a6;
+  }
+  .excerpt {
+    color: var(--text);
+    margin: 0.75rem 0;
+  }
+  
+  /* ============================= */
+  /* FORMS */
+  input, textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.2s ease;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #8899a6;
+  }
+  
+  /* ============================= */
+  /* LAYOUT HELPERS */
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .grid {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  /* ============================= */
+  /* HEADER / NAVIGATION */
+  .header {
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+  }
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--text-strong);
+  }
+  .links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .iconLink {
+    color: var(--text);
+    transition: color 0.2s ease;
+  }
+  .iconLink:hover {
+    color: var(--accent);
+  }
+  .themeToggle {
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .themeToggle:hover {
+    color: var(--accent);
+  }
+  
+  /* ============================= */
+  /* MISC / TRANSITIONS */
+  * {
+    box-sizing: border-box;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  
+  /* ============================= */
+  /* APP LAYOUT */
+  .appLayout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .main {
+    flex: 1;
+    max-width: 600px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+  .footer {
+    text-align: center;
+    padding: 1rem;
+    border-top: 1px solid var(--border);
+    color: #536471;
+    font-size: 0.9rem;
+  }
+  body[data-theme="dark"] .footer {
+    color: #8899a6;
+  }
+  
