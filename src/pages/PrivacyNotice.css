@@ -1,0 +1,300 @@
+/* PrivacyNotice.css - GDPR-compliant Privacy Notice styling */
+
+.privacy-notice {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--card-bg, #ffffff);
+    color: var(--text, #0f1419);
+    line-height: 1.7;
+}
+
+.privacy-notice h1 {
+    color: var(--text-strong, #15202b);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 3px solid var(--accent, #1d9bf0);
+    padding-bottom: 1rem;
+}
+
+.privacy-notice .updated {
+    color: var(--text, #536471);
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.privacy-notice section {
+    margin-bottom: 2.5rem;
+}
+
+.privacy-notice h2 {
+    color: var(--text-strong, #15202b);
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border, #e6ecf0);
+    padding-bottom: 0.5rem;
+}
+
+.privacy-notice h3 {
+    color: var(--text-strong, #15202b);
+    font-size: 1.35rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.privacy-notice p {
+    margin-bottom: 1rem;
+}
+
+.privacy-notice ul,
+.privacy-notice ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.privacy-notice li {
+    margin-bottom: 0.5rem;
+}
+
+.privacy-notice a {
+    color: var(--accent, #1d9bf0);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.privacy-notice a:hover {
+    color: #1a8cd8;
+}
+
+.cookie-section {
+    background-color: var(--bg, #f7f9fa);
+    border-left: 4px solid var(--accent, #1d9bf0);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+}
+
+.cookie-section.necessary {
+    border-left-color: #10b981;
+}
+
+.cookie-section.marketing {
+    border-left-color: #f59e0b;
+}
+
+.cookie-section.analytics {
+    border-left-color: #8b5cf6;
+}
+
+.cookie-section h3 {
+    margin-top: 0;
+}
+
+.cookie-badge {
+    display: inline-block;
+    background-color: var(--accent, #1d9bf0);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.rights-section {
+    background-color: var(--bg, #f7f9fa);
+    border-left: 4px solid #10b981;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+}
+
+.rights-section h3 {
+    margin-top: 0;
+    color: #10b981;
+}
+
+.note {
+    background-color: #dbeafe;
+    border-left: 4px solid #3b82f6;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.warning {
+    background-color: #fef2f2;
+    border-left: 4px solid #ef4444;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #991b1b;
+}
+
+.privacy-footer {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    border-top: 2px solid var(--border, #e6ecf0);
+    margin-top: 3rem;
+    color: var(--text, #536471);
+}
+
+/* Dark mode support */
+body[data-theme="dark"] .privacy-notice {
+    background-color: var(--card-bg, #16181c);
+    color: var(--text, #e7e9ea);
+}
+
+body[data-theme="dark"] .cookie-section,
+body[data-theme="dark"] .rights-section {
+    background-color: var(--bg, #0d1117);
+}
+
+body[data-theme="dark"] .note {
+    background-color: #1e3a5f;
+    border-left-color: #3b82f6;
+    color: #bfdbfe;
+}
+
+body[data-theme="dark"] .warning {
+    background-color: #4a1c1c;
+    border-left-color: #ef4444;
+    color: #fca5a5;
+}
+
+/* Responsiv design för mobil */
+@media (max-width: 768px) {
+    .privacy-notice {
+        padding: 1rem;
+    }
+
+    .privacy-notice h1 {
+        font-size: 2rem;
+    }
+
+    .privacy-notice h2 {
+        font-size: 1.5rem;
+    }
+
+    .privacy-notice h3 {
+        font-size: 1.2rem;
+    }
+}
+
+.privacy-notice ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.privacy-notice li {
+    margin-bottom: 0.5rem;
+}
+
+.privacy-notice a {
+    color: var(--accent, #1d9bf0);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.privacy-notice a:hover {
+    color: #1a8cd8;
+}
+
+.cookie-section {
+    background-color: var(--bg, #f7f9fa);
+    border-left: 4px solid var(--accent, #1d9bf0);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+}
+
+.cookie-section h3 {
+    margin-top: 0;
+}
+
+.rights-section {
+    background-color: var(--bg, #f7f9fa);
+    border-left: 4px solid #10b981;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+}
+
+.rights-section h3 {
+    margin-top: 0;
+    color: #10b981;
+}
+
+.note {
+    background-color: #dbeafe;
+    border-left: 4px solid #3b82f6;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.warning {
+    background-color: #fef2f2;
+    border-left: 4px solid #ef4444;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #991b1b;
+}
+
+.privacy-footer {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    border-top: 2px solid var(--border, #e6ecf0);
+    margin-top: 3rem;
+    color: var(--text, #536471);
+}
+
+/* Dark mode support */
+body[data-theme="dark"] .privacy-notice {
+    background-color: var(--card-bg, #16181c);
+    color: var(--text, #e7e9ea);
+}
+
+body[data-theme="dark"] .cookie-section,
+body[data-theme="dark"] .rights-section {
+    background-color: var(--bg, #0d1117);
+}
+
+body[data-theme="dark"] .note {
+    background-color: #1e3a5f;
+    border-left-color: #3b82f6;
+    color: #bfdbfe;
+}
+
+body[data-theme="dark"] .warning {
+    background-color: #4a1c1c;
+    border-left-color: #ef4444;
+    color: #fca5a5;
+}
+
+/* Responsiv design för mobil */
+@media (max-width: 768px) {
+    .privacy-notice {
+        padding: 1rem;
+    }
+
+    .privacy-notice h1 {
+        font-size: 2rem;
+    }
+
+    .privacy-notice h2 {
+        font-size: 1.5rem;
+    }
+
+    .privacy-notice h3 {
+        font-size: 1.2rem;
+    }
+}

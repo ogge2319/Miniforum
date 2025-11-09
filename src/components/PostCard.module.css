@@ -1,74 +1,107 @@
 .card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1rem;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
-  }
-  
-  .card:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .header h2 {
-    font-size: 1.1rem;
-    margin: 0;
-    color: var(--text-strong);
-  }
-  
-  .date {
-    color: #536471;
-    font-size: 0.85rem;
-  }
-  
-  .excerpt {
-    color: var(--text);
-    margin: 0.75rem 0;
-  }
-  
-  .actions {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .btn {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 9999px;
-    padding: 0.4rem 1rem;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background 0.2s ease;
-  }
-  
-  .btn:hover {
-    background: #0c7abf;
-  }
-  
-  .btnSecondary {
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-  }
-  
-  .btnSecondary:hover {
-    background: rgba(29, 155, 240, 0.1);
-  }
-  
-  /* Dark mode säkerhet */
-  [data-theme="dark"] .date {
-    color: #8899a6;
-  }
-  
-  [data-theme="dark"] .btn:hover {
-    background: #1a91da;
-  }
-  
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--text-strong);
+}
+
+.date {
+  color: #536471;
+  font-size: 0.85rem;
+}
+
+.excerpt {
+  color: var(--text);
+  margin: 0.75rem 0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #0c7abf;
+}
+
+.btnSecondary {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.btnSecondary:hover {
+  background: rgba(29, 155, 240, 0.1);
+}
+
+.btnLiked {
+  background: #f91880;
+  color: #fff;
+}
+
+.btnLiked:hover {
+  background: #e0115f;
+}
+
+.btnDanger {
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}
+
+.btnDanger:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.btnSuccess {
+  background: #10b981;
+  color: #fff;
+  border: none;
+}
+
+.btnSuccess:hover {
+  background: #059669;
+}
+
+/* Dark mode säkerhet */
+[data-theme="dark"] .date {
+  color: #8899a6;
+}
+
+[data-theme="dark"] .btn:hover {
+  background: #1a91da;
+}

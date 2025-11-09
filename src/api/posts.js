@@ -1,37 +1,43 @@
 // src/api/posts.js
-import { api } from "./client";
+import { domainApi } from "./client";
 
 // LISTA INLÄGG
 export const getPosts = async () => {
-  const res = await api.get("/posts");
+  const res = await domainApi.get("/posts");
   return res.data;
 };
 
 // HÄMTA ETT INLÄGG
 export const getPostById = async (id) => {
-  const res = await api.get(`/posts/${id}`);
+  const res = await domainApi.get(`/posts/${id}`);
   return res.data;
 };
 
 // SKAPA INLÄGG
 export const createPost = async (data) => {
-  const res = await api.post("/posts", data);
+  const res = await domainApi.post("/posts", data);
   return res.data;
 };
 
 // TA BORT INLÄGG
 export const deletePost = async (id) => {
-  await api.delete(`/posts/${id}`);
+  await domainApi.delete(`/posts/${id}`);
 };
 
 // KOMMENTARER: LISTA
 export const getComments = async (postId) => {
-  const res = await api.get(`/posts/${postId}/comments`);
+  const res = await domainApi.get(`/posts/${postId}/comments`);
   return res.data;
 };
 
 // KOMMENTARER: SKAPA
 export const createComment = async (postId, data) => {
-  const res = await api.post(`/posts/${postId}/comments`, data);
+  const res = await domainApi.post(`/posts/${postId}/comments`, data);
+  return res.data;
+};
+
+// LIKE: TOGGLE
+export const toggleLike = async (postId) => {
+  const res = await domainApi.post(`/posts/${postId}/like`);
   return res.data;
 };

@@ -1,5 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { SocketProvider } from "./context/SocketContext";
 import App from "./App";
 import "./index.css";
 import "./styles/global.css"; // ✅ Lägg till denna rad så att variablerna laddas globalt
@@ -12,5 +15,15 @@ async function enableMocking() {
 }
 
 enableMocking().then(() => {
-  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <AuthProvider>
+          <SocketProvider>
+            <App />
+          </SocketProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
 });

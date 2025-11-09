@@ -1,5 +1,6 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import Header from "../components/Header";
+import CookieBanner from "../components/CookieBanner";
 import styles from "./MainLayout.module.css";
 
 export default function MainLayout({ children }) {
@@ -16,7 +17,13 @@ export default function MainLayout({ children }) {
       {/* Footer */}
       <footer className={styles.footer}>
         <small>© 2025 MiniForum – Demo</small>
+        <div className={styles.footerLinks}>
+          <Link to="/privacy">Privacy & Cookies</Link>
+        </div>
       </footer>
+
+      {/* Cookie Consent Banner */}
+      <CookieBanner />
     </div>
   );
 }
