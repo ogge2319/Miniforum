@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Settings from "./pages/Settings";
 import PrivacyNotice from "./pages/PrivacyNotice";
 import ProfilePage from "./pages/ProfilePage";
+import { ConsentProvider } from "./context/ConsentContext";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -32,6 +33,7 @@ const ProtectedRoute = ({ children }) => {
 
 export default function App() {
   return (
+    <ConsentProvider>
     <MainLayout>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -50,5 +52,6 @@ export default function App() {
         />
       </Routes>
     </MainLayout>
+    </ConsentProvider>
   );
 }
