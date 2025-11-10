@@ -6,6 +6,7 @@ import styles from "./header.module.css";
 
 export default function Header() {
   const { user, logout } = useAuth();
+  console.log('Header user:', user);
   const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
@@ -39,6 +40,11 @@ export default function Header() {
 
           {user ? (
             <>
+              {user._id && (
+                <Link to={`/profile/${user._id}`} className={styles.iconLink} title="Min profil">
+                  <User size={22} />
+                </Link>
+              )}
               <Link to="/settings" className={styles.iconLink} title="Inställningar">
                 <Settings size={22} />
               </Link>

@@ -15,7 +15,6 @@ export default function ProfilePage() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [isPrivate, setIsPrivate] = useState(false);
     const [isFollowing, setIsFollowing] = useState(false);
     const [followersCount, setFollowersCount] = useState(0);
     const [followingCount, setFollowingCount] = useState(0);
@@ -40,23 +39,10 @@ export default function ProfilePage() {
 
             // Hämta användarens posts
             const postsResponse = await domainApi.get(`/posts/user/${userId}`);
-
-            // Om tom array returneras = privat profil
-            if (Array.isArray(postsResponse.data) && postsResponse.data.length === 0) {
-                setIsPrivate(true);
-                setPosts([]);
-            } else {
-                setPosts(postsResponse.data);
-                setIsPrivate(false);
-            }
-
+            setPosts(postsResponse.data);
         } catch (err) {
             console.error('Profile load error:', err);
-            if (err.response?.status === 403) {
-                setIsPrivate(true);
-            } else {
-                setError('Kunde inte ladda profil');
-            }
+            setError('Kunde inte ladda profil');
         } finally {
             setLoading(false);
         }
@@ -175,21 +161,7 @@ export default function ProfilePage() {
             <div>
                 <h2 style={{ marginBottom: '1rem' }}>Inlägg av {user?.name}</h2>
 
-                {isPrivate ? (
-                    <div style={{
-                        backgroundColor: 'var(--card-bg)',
-                        padding: '3rem 2rem',
-                        borderRadius: '8px',
-                        textAlign: 'center',
-                        border: '2px dashed var(--border)'
-                    }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔒</div>
-                        <h3>This profile is private</h3>
-                        <p style={{ color: 'var(--text)', marginTop: '0.5rem' }}>
-                            Denna användare har valt att hålla sin profil privat.
-                        </p>
-                    </div>
-                ) : posts.length === 0 ? (
+                {posts.length === 0 ? (
                     <div style={{
                         backgroundColor: 'var(--card-bg)',
                         padding: '2rem',

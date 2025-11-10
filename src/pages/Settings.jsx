@@ -16,7 +16,10 @@ export default function Settings() {
     marketing: false,
     analytics: false
   });
-  const [isPrivate, setIsPrivate] = useState(false);
+
+  const { logout, user, setUser } = useAuth();
+
+
   const [profileData, setProfileData] = useState({
     name: '',
     bio: ''
@@ -25,12 +28,11 @@ export default function Settings() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  const { logout, user } = useAuth();
+
   const navigate = useNavigate();
 
   useEffect(() => {
     loadConsents();
-    loadPrivacy();
     loadProfile();
   }, [user]);
 
@@ -43,13 +45,6 @@ export default function Settings() {
     }
   };
 
-  const loadPrivacy = async () => {
-    try {
-      setIsPrivate(user?.isPrivate || false);
-    } catch (error) {
-      console.error('Failed to load privacy status:', error);
-    }
-  };
 
   const loadProfile = () => {
     if (user) {
@@ -76,26 +71,23 @@ export default function Settings() {
     }
   };
 
-  const handlePrivacyToggle = async () => {
-    const newPrivacy = !isPrivate;
-    setIsPrivate(newPrivacy);
-
-    try {
-      await authApi.put('/profile/privacy', { isPrivate: newPrivacy });
-      setMessage(`Profil är nu ${newPrivacy ? 'privat' : 'publik'}`);
-      setTimeout(() => setMessage(''), 3000);
-    } catch (error) {
-      setMessage('Kunde inte uppdatera privacy inställningar');
-      setIsPrivate(!newPrivacy); // Revert on error
-    }
-  };
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      await authApi.put('/profile', profileData);
+      const res = await authApi.put('/profile', {
+        name: profileData.name,
+        bio: profileData.bio,
+      });
+
+      // 🧩 Uppdatera frontendens användardata direkt
+      if (res.data?.user) {
+        setUser(res.data.user); // <-- den här raden uppdaterar AuthContext
+        localStorage.setItem('user', JSON.stringify(res.data.user)); // (valfritt men rekommenderat)
+      }
+
       setMessage('Profil uppdaterad!');
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
@@ -211,22 +203,6 @@ export default function Settings() {
         </form>
       </section>
 
-      <section style={{ marginBottom: '2rem' }}>
-        <h2>Profil Sekretess</h2>
-        <div style={{ marginBottom: '1rem' }}>
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-            <input
-              type="checkbox"
-              checked={isPrivate}
-              onChange={handlePrivacyToggle}
-            />
-            <span>🔒 Privat Profil</span>
-          </label>
-          <p style={{ marginLeft: '1.5rem', fontSize: '0.9rem', color: '#536471' }}>
-            Dölj dina inlägg från andra användare. Endast du kan se dina posts.
-          </p>
-        </div>
-      </section>
 
       <section style={{ marginBottom: '2rem' }}>
         <h2>Cookie Samtycken</h2>
