@@ -1,17 +1,19 @@
 import axios from "axios";
 
-// AUTH API - Via Vite proxy
+// AUTH API - Använd miljövariabel i produktion, annars proxy i dev
+const authBaseURL = import.meta.env.VITE_AUTH_BACKEND_URL || "/api/auth";
+const domainBaseURL = import.meta.env.VITE_DOMAIN_BACKEND_URL || "/api";
+
 export const authApi = axios.create({
-  baseURL: "/api/auth",
+  baseURL: authBaseURL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
   }
 });
 
-// DOMAIN API - Via Vite proxy
 export const domainApi = axios.create({
-  baseURL: "/api",
+  baseURL: domainBaseURL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
