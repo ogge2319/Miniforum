@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSocket } from "../context/SocketContext";
-import { getPosts, createPost, deletePost } from "../api/posts";
+import { getFeedPosts, createPost, deletePost } from "../api/posts";
 import PostCard from "../components/PostCard";
 
 export default function Home() {
@@ -17,8 +17,8 @@ export default function Home() {
   const loadPosts = async () => {
     setLoading(true);
     try {
-      const data = await getPosts();
-      setPosts(data);                       // <-- lagt till
+      const data = await getFeedPosts();
+      setPosts(data);
     } catch (err) {
       console.error("Fel vid hämtning av inlägg:", err);
     } finally {

@@ -22,9 +22,13 @@ export default function Settings() {
 
   const [profileData, setProfileData] = useState({
     name: '',
-    bio: ''
+    bio: '',
+    profilePicture: ''
   });
+  // Ingen filuppladdning, profilePicture är bara text
   const [deletePassword, setDeletePassword] = useState('');
+  // Redirect immediately if user is null
+  if (!user) return <Navigate to="/login" replace />;
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -50,7 +54,8 @@ export default function Settings() {
     if (user) {
       setProfileData({
         name: user.name || '',
-        bio: user.bio || ''
+        bio: user.bio || '',
+        profilePicture: user.profilePicture || ''
       });
     }
   };
@@ -75,19 +80,16 @@ export default function Settings() {
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const res = await authApi.put('/profile', {
         name: profileData.name,
         bio: profileData.bio,
+        profilePicture: profileData.profilePicture
       });
-
-      // 🧩 Uppdatera frontendens användardata direkt
       if (res.data?.user) {
-        setUser(res.data.user); // <-- den här raden uppdaterar AuthContext
-        localStorage.setItem('user', JSON.stringify(res.data.user)); // (valfritt men rekommenderat)
+        setUser(res.data.user);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
       }
-
       setMessage('Profil uppdaterad!');
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
@@ -119,8 +121,8 @@ export default function Settings() {
     setLoading(true);
     try {
       await deleteAccount(deletePassword);
-      await logout();
-      navigate('/');
+      setUser(null); // Nollställ användaren direkt
+      navigate('/login'); // Navigera till login-sidan
     } catch (error) {
       setMessage('Kunde inte radera konto. Kontrollera ditt lösenord.');
       setLoading(false);
@@ -180,6 +182,24 @@ export default function Settings() {
                 borderRadius: '4px',
                 fontSize: '1rem',
                 resize: 'vertical'
+              }}
+            />
+          </label>
+
+          <label style={{ display: 'block', marginBottom: '1rem' }}>
+            <span style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Profilbild (text/URL)</span>
+            <input
+              type="text"
+              value={profileData.profilePicture}
+              onChange={e => setProfileData({ ...profileData, profilePicture: e.target.value })}
+              placeholder="Länk eller text till profilbild"
+              disabled={loading}
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                fontSize: '1rem'
               }}
             />
           </label>

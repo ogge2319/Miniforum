@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { UserPlus, UserMinus } from 'lucide-react';
-import { authApi, domainApi } from '../api/client';
+import { authApi } from '../api/client';
+import { getUserPosts } from '../api/posts';
 import { toggleFollow } from '../api/auth';
 import { useAuth } from '../context/AuthContext';
 import PostCard from '../components/PostCard';
@@ -20,9 +21,30 @@ export default function ProfilePage() {
     const [followingCount, setFollowingCount] = useState(0);
     const [followLoading, setFollowLoading] = useState(false);
 
+
     useEffect(() => {
-        loadProfile();
-    }, [userId]);
+        // Om det är min egen profil, visa alltid senaste från AuthContext
+        if (currentUser && userId === currentUser._id) {
+            setUser(currentUser);
+            // Hämta även mina egna posts
+            loadOwnPosts();
+        } else {
+            loadProfile();
+        }
+    }, [userId, currentUser]);
+
+    const loadOwnPosts = async () => {
+        setLoading(true);
+        setError('');
+        try {
+            const data = await getUserPosts(userId);
+            setPosts(data);
+        } catch (err) {
+            setError('Kunde inte ladda inlägg');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const loadProfile = async () => {
         setLoading(true);
@@ -38,8 +60,8 @@ export default function ProfilePage() {
             setFollowingCount(userData.followingCount || 0);
 
             // Hämta användarens posts
-            const postsResponse = await domainApi.get(`/posts/user/${userId}`);
-            setPosts(postsResponse.data);
+            const data = await getUserPosts(userId);
+            setPosts(data);
         } catch (err) {
             console.error('Profile load error:', err);
             setError('Kunde inte ladda profil');
@@ -118,9 +140,11 @@ export default function ProfilePage() {
                         </div>
                         <div>
                             <h1 style={{ margin: 0 }}>{user?.name || 'Okänd användare'}</h1>
-                            <p style={{ margin: '0.5rem 0', color: 'var(--text)' }}>
-                                {user?.email || 'Ingen email'}
-                            </p>
+                            {user?.bio && (
+                                <p style={{ margin: '0.5rem 0', color: '#888' }}>
+                                    {user.bio}
+                                </p>
+                            )}
                             <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text)' }}>
                                 Medlem sedan {user?.createdAt ? new Date(user.createdAt).toLocaleDateString('sv-SE') : 'Okänt'}
                             </p>

@@ -43,18 +43,21 @@ export const SocketProvider = ({ children }) => {
 
             setSocket(newSocket);
 
-            // Cleanup vid unmount
+            // Cleanup vid unmount eller user blir null
             return () => {
                 newSocket.close();
+                setSocket(null);
+                setIsConnected(false);
             };
         } else {
-            // Disconnecta socket om användaren loggar ut
+            // Disconnecta socket om användaren loggar ut eller tas bort
             if (socket) {
                 socket.close();
                 setSocket(null);
                 setIsConnected(false);
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     const value = {

@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Sun, Moon, Home, User, Settings, UserPlus, LogOut } from "lucide-react";
+
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import UserSearch from "./UserSearch";
 import styles from "./header.module.css";
 
 export default function Header() {
   const { user, logout } = useAuth();
-  console.log('Header user:', user);
   const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
@@ -28,6 +29,7 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
+      <UserSearch />
       <nav className={styles.nav}>
         <Link to="/" className={styles.logo}>
           🐦 MiniForum

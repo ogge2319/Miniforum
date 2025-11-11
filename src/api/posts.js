@@ -1,3 +1,14 @@
+// HÄMTA INLÄGG FÖR EN ANVÄNDARE
+export const getUserPosts = async (userId) => {
+  const res = await domainApi.get(`/posts/user/${userId}`);
+  return res.data;
+};
+
+// HÄMTA FEED (egna + följda)
+export const getFeedPosts = async () => {
+  const res = await domainApi.get('/posts/feed');
+  return res.data;
+};
 // src/api/posts.js
 import { domainApi } from "./client";
 

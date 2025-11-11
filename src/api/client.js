@@ -19,25 +19,28 @@ export const domainApi = axios.create({
 });
 
 // CSRF Token Management
-let csrfToken = null;
+export let csrfToken = null;
+export function setCSRFToken(token) { csrfToken = token; }
+export function clearCSRFToken() { csrfToken = null; }
+export function getCSRFToken() { return csrfToken; }
 
 // AUTH API - Request Interceptor
+
 authApi.interceptors.request.use(
   async (config) => {
-    if (!['GET', 'HEAD', 'OPTIONS'].includes(config.method.toUpperCase())) {
+    const method = config.method.toUpperCase();
+    const url = config.url;
+    // Skippa CSRF för login, register och csrf-token
+    if (
+      !['GET', 'HEAD', 'OPTIONS'].includes(method) &&
+      !url.endsWith('/login') &&
+      !url.endsWith('/register') &&
+      !url.endsWith('/csrf-token')
+    ) {
       if (!csrfToken) {
-        try {
-          const response = await axios.get('/api/auth/csrf-token', {
-            withCredentials: true
-          });
-          csrfToken = response.data.csrfToken;
-        } catch (error) {
-          console.error('CSRF token fetch failed:', error);
-        }
+        throw new Error('Ingen CSRF-token – användaren måste vara inloggad och ha hämtat token!');
       }
-      if (csrfToken) {
-        config.headers['X-CSRF-Token'] = csrfToken;
-      }
+      config.headers['X-CSRF-Token'] = csrfToken;
     }
     return config;
   },
